@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Experience</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>Welcome to Celestialseven.co!</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="products.html">About the Event</a></li>
+                <li><a href="lookbook.html" class="active">Workshops</a></li>
+                <li><a href="about.html">Conditions & Policy</a></li>
+                <li><a href="chat.html">Chatbox</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="interactive-experience">
+            <h2>Interactive Experience</h2>
+            <div id="step-1" class="step">
+                <p>Welcome! What type of art are you interested in?</p>
+                <button onclick="chooseArtType('sewing')">Sewing</button>
+                <button onclick="chooseArtType('digital-design')">Digital Design</button>
+                <button onclick="chooseArtType('traditional-art')">Traditional Art</button>
+                <button onclick="chooseArtType('comics')">Comics</button>
+            </div>
+            <div id="step-2" class="step hidden">
+                <p id="chosen-art-type"></p>
+                <p>What level of expertise do you have?</p>
+                <button onclick="chooseExpertiseLevel('beginner')">Beginner</button>
+                <button onclick="chooseExpertiseLevel('intermediate')">Intermediate</button>
+                <button onclick="chooseExpertiseLevel('advanced')">Advanced</button>
+            </div>
+            <div id="step-3" class="step hidden">
+                <p id="chosen-expertise"></p>
+                <p>What would you like to achieve?</p>
+                <button onclick="chooseGoal('learn-basics')">Learn Basics</button>
+                <button onclick="chooseGoal('enhance-skills')">Enhance Skills</button>
+                <button onclick="chooseGoal('create-project')">Create a Project</button>
+            </div>
+            <div id="step-4" class="step hidden">
+                <p id="chosen-goal"></p>
+                <p>Based on your choices, we recommend:</p>
+                <ul id="recommendations"></ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Contact us at: TheComicVerse@gmail.com</p>
+        <p>&copy; 2024 Art Trade Fair. All rights reserved.</p>
+    </footer>
+    
+    <script>
+        function chooseArtType(artType) {
+            document.getElementById('chosen-art-type').textContent = `You chose: ${artType}`;
+            document.getElementById('step-1').classList.add('hidden');
+            document.getElementById('step-2').classList.remove('hidden');
+        }
+
+        function chooseExpertiseLevel(level) {
+            document.getElementById('chosen-expertise').textContent = `Your expertise level: ${level}`;
+            document.getElementById('step-2').classList.add('hidden');
+            document.getElementById('step-3').classList.remove('hidden');
+        }
+
+        function chooseGoal(goal) {
+            document.getElementById('chosen-goal').textContent = `Your goal: ${goal}`;
+            document.getElementById('step-3').classList.add('hidden');
+            document.getElementById('step-4').classList.remove('hidden');
+
+            let recommendations = [];
+            const artType = document.getElementById('chosen-art-type').textContent.split(': ')[1];
+            const level = document.getElementById('chosen-expertise').textContent.split(': ')[1];
+
+            if (artType === 'sewing') {
+                recommendations.push('Join our beginner sewing workshop to learn the basics.');
+                if (level === 'intermediate' || level === 'advanced') {
+                    recommendations.push('Advanced costume creation class.');
+                }
+            } else if (artType === 'digital-design') {
+                recommendations.push('Digital design basics workshop.');
+                if (level === 'intermediate' || level === 'advanced') {
+                    recommendations.push('Advanced digital illustration class.');
+                }
+            } else if (artType === 'traditional-art') {
+                recommendations.push('Introduction to traditional art techniques.');
+                if (level === 'intermediate' || level === 'advanced') {
+                    recommendations.push('Masterclass in traditional painting.');
+                }
+            } else if (artType === 'comics') {
+                recommendations.push('Creating comics for beginners.');
+                if (level === 'intermediate' || level === 'advanced') {
+                    recommendations.push('Storytelling in comics masterclass.');
+                }
+            }
+
+            const recommendationsList = document.getElementById('recommendations');
+            recommendationsList.innerHTML = '';
+            recommendations.forEach(rec => {
+                const li = document.createElement('li');
+                li.textContent = rec;
+                recommendationsList.appendChild(li);
+            });
+        }
+    </script>
+</body>
+</html>

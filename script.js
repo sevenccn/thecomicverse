@@ -1,56 +1,89 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const formModal = document.getElementById("formModal");
-    const successModal = document.getElementById("successModal");
-    const registerButton = document.getElementById("registerButton");
-    const closeButtons = document.getElementsByClassName("close");
+document.addEventListener('DOMContentLoaded', function() {
+    // Countdown Timer
+    const endDate = new Date("June 28, 2024 09:00:00").getTime();
 
-    registerButton.onclick = function() {
-        formModal.style.display = "block";
-    }
-
-    for (let i = 0; i < closeButtons.length; i++) {
-        closeButtons[i].onclick = function() {
-            formModal.style.display = "none";
-            successModal.style.display = "none";
-        }
-    }
-
-    window.onclick = function(event) {
-        if (event.target == formModal || event.target == successModal) {
-            formModal.style.display = "none";
-            successModal.style.display = "none";
-        }
-    }
-
-    const form = document.getElementById("registrationForm");
-    form.onsubmit = function(event) {
-        event.preventDefault();
-        formModal.style.display = "none";
-        successModal.style.display = "block";
-    }
-
-    // Timer functionality
-    const countdown = () => {
-        const eventDate = new Date('June 28, 2024 09:00:00').getTime();
+    function updateCountdown() {
         const now = new Date().getTime();
-        const timeLeft = eventDate - now;
+        const distance = endDate - now;
 
-        const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-        document.getElementById('days').innerText = days;
-        document.getElementById('hours').innerText = hours;
-        document.getElementById('minutes').innerText = minutes;
-        document.getElementById('seconds').innerText = seconds;
+        document.getElementById("days").innerText = days;
+        document.getElementById("hours").innerText = hours;
+        document.getElementById("minutes").innerText = minutes;
+        document.getElementById("seconds").innerText = seconds;
 
-        if (timeLeft < 0) {
-            clearInterval(timerInterval);
-            document.getElementById('timer').innerHTML = "The event has started!";
+        if (distance < 0) {
+            clearInterval(countdownInterval);
+            document.getElementById("timer").innerText = "Event Started!";
         }
     }
 
-    const timerInterval = setInterval(countdown, 1000);
+    const countdownInterval = setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    // Chat Box
+    const chatButton = document.getElementById('chat');
+    const chatBox = document.getElementById('chat-box');
+    const sendButton = document.getElementById('send-button');
+    const chatInput = document.getElementById('chat-input');
+    const messagesContainer = chatBox.querySelector('.messages');
+
+    chatButton.addEventListener('click', function() {
+        chatBox.style.display = 'block';
+    });
+
+    sendButton.addEventListener('click', function() {
+        const message = chatInput.value.trim();
+        if (message) {
+            addMessage('user', message);
+            chatInput.value = '';
+            setTimeout(() => {
+                addMessage('bot', 'Hello! How can I help you?');
+            }, 500);
+        }
+    });
+
+    chatInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            sendButton.click();
+        }
+    });
+
+    function addMessage(sender, text) {
+        const messageElement = document.createElement('div');
+        messageElement.classList.add('message');
+
+        const profilePicture = document.createElement('img');
+        profilePicture.src = sender === 'user' ? 'user-profile.png' : 'bot-profile.png';
+        messageElement.appendChild(profilePicture);
+
+        const textElement = document.createElement('div');
+        textElement.classList.add('text');
+        textElement.textContent = text;
+        messageElement.appendChild(textElement);
+
+        messagesContainer.appendChild(messageElement);
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+
+    // Workshop Registration Form
+    const workshopForm = document.querySelector('form');
+
+    workshopForm.addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent form submission
+        alert("Registration successful! You will be notified 15 minutes before the start of the workshop.");
+    });
+
+    // Notify before workshop starts
+    const workshopStartDate = new Date("June 28, 2024 09:00:00").getTime();
+    const notifyTime = workshopStartDate - (15 * 60 * 1000); // 15 minutes before start
+
+    setTimeout(function() {
+        alert("Workshop will start in 15 minutes!");
+    }, notifyTime - Date.now());
 });
 

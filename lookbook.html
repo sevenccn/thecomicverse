@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Celestialseven.co</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <header>
+        <h1>
+            Welcome to Celestialseven.co!
+        </h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">home</a></li>
+                <li><a href="products.html">About the event</a></li>
+                <li><a href="lookbook.html"class="active">Workshops</a></li>
+                <li><a href="about.html">Conditions & Policy</a></li>
+                <li><a href="chat.html">Chatbox</a></li>
+            </ul>
+        </nav>
+    </header>
+
+
+        
+            <main>
+                <section id="sewing-quiz">
+                    <h2>Sewing Workshop Quiz</h2>
+                    <form id="quiz-form">
+                        <div class="quiz-step">
+                            <p>What's your sewing experience level?</p>
+                            <label>
+                                <input type="radio" name="experience" value="beginner" required> Beginner
+                            </label>
+                            <label>
+                                <input type="radio" name="experience" value="intermediate"> Intermediate
+                            </label>
+                            <label>
+                                <input type="radio" name="experience" value="advanced"> Advanced
+                            </label>
+                        </div>
+                        <div class="quiz-step hidden">
+                            <p>What is your main goal for attending the workshop?</p>
+                            <label>
+                                <input type="radio" name="goal" value="learn-basics" required> Learn the basics
+                            </label>
+                            <label>
+                                <input type="radio" name="goal" value="enhance-skills"> Enhance my skills
+                            </label>
+                            <label>
+                                <input type="radio" name="goal" value="complete-project"> Complete a project
+                            </label>
+                        </div>
+                     
+                        <button type="submit" id="next-step">Send it over!</button>
+                    </form>
+                </section>
+       
+ 
+            
+            <script>
+            document.addEventListener('DOMContentLoaded', function() {
+    const quizForm = document.getElementById('quiz-form');
+    const quizSteps = document.querySelectorAll('.quiz-step');
+    const sendItOverButton = document.getElementById('send-it-over');
+    const restartQuizButton = document.getElementById('restart-quiz');
+    const quizResult = document.getElementById('quiz-result');
+    let currentStep = 0;
+
+    sendItOverButton.addEventListener('click', function() {
+        if (currentStep < quizSteps.length - 1) {
+            quizSteps[currentStep].classList.add('hidden');
+            currentStep++;
+            quizSteps[currentStep].classList.remove('hidden');
+            if (currentStep === quizSteps.length - 1) {
+                displayResult();
+                sendItOverButton.classList.add('hidden');
+            }
+        }
+    });
+
+    restartQuizButton.addEventListener('click', function() {
+        quizSteps[currentStep].classList.add('hidden');
+        currentStep = 0;
+        quizSteps[currentStep].classList.remove('hidden');
+        sendItOverButton.classList.remove('hidden');
+        quizForm.reset(); // Reset the form
+        quizResult.textContent = ''; // Clear result text
+    });
+
+    function displayResult() {
+        const experience = document.querySelector('input[name="experience"]:checked');
+        if (experience) {
+            switch (experience.value) {
+                case 'beginner':
+                    quizResult.textContent = "We suggest you work closely with someone for a better experience!";
+                    break;
+                case 'intermediate':
+                    quizResult.textContent = "Looks like you know your basics, which will fit perfectly for you to enhance those skills even more!";
+                    break;
+                case 'advanced':
+                    quizResult.textContent = "We hope to inspire you to become even better or help you finish that project you've always wanted to complete!";
+                    break;
+                default:
+                    quizResult.textContent = "";
+            }
+        }
+    }
+
+    function handleFormSubmit(event) {
+        event.preventDefault(); // Prevent default form submission
+        // Handle form submission logic here, if needed
+    }
+
+    quizForm.addEventListener('submit', handleFormSubmit); // Attach form submit listener
+});
+
+
+            </script>
+        
+
+        
+        <section id="workshops">
+            <h2>Workshops</h2>
+            <p>Join our exclusive workshop on learning how to sew and complete your own costumes. Perfect for cosplay enthusiasts! We always start at 1!</p>
+            <form action="submit_registration.php" method="post">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+    
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+    
+                <label for="workshop-date">Select a workshop date:</label>
+                <select id="workshop-date" name="workshop-date" required>
+                    <option value="june-28">June 28th</option>
+                    <option value="july-15">July 15th</option>
+                </select>
+    
+                <button type="submit">Register</button>
+
+            </form>
+
+        </section>
+    </main>
+
+   <footer>
+        <p>Contact us at: TheComicVerse@gmail.com</p>
+        <p>&copy; 2024 Art Trade Fair. All rights reserved.</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+
+
+</html>

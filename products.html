@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Celestialseven.co</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+
+    <header>
+        <h1>
+            welcome to celestialseven.co!
+        </h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">home</a></li>
+                <li><a href="products.html"class="active">About the event</a></li>
+                <li><a href="lookbook.html">Workshops</a></li>
+                <li><a href="about.html">Conditions & Policy</a></li>
+                <li><a href="chat.html">Chatbox</a></li>
+            </ul>
+        </nav>
+    </header>
+
+
+
+
+    <h2>
+        products
+    </h2>
+    <main>
+
+        <section id="details">
+            <h2>Event Details</h2>
+            <ul>
+                <li><strong>Date:</strong> June 28th</li>
+                <li><strong>Next Date:</strong> July 15th</li>
+                <li><strong>Time:</strong> 9:00 AM - 5:00 PM</li>
+                <li><strong>Location:</strong> Theo Thijssen-gebouw, 3rd Floor, HvA</li>
+                <li><strong>Activities:</strong> Art booths, live demos, art exchanges, and more!</li>
+            </ul>
+        </section>
+
+        <section id="details">
+        <h2>Event Goals</h2>
+        <p>This fair aims to build a community for comic design enthusiasts. Share your passion for graphic design, gain inspiration, interact with like-minded individuals, and get recognition for your work.</p>
+    </section>
+
+    <section id="personalized-experience">
+        <h2>Personalized Experience for when you arrive!</h2>
+        <form id="preferences-form">
+            <label for="interest">What are you interested in?</label>
+            <select id="interest" name="interest">
+                <option value="sewing">Sewing</option>
+                <option value="digital-design">Digital Design</option>
+                <option value="traditional-art">Traditional Art</option>
+                <option value="comics">Comics</option>
+            </select>
+            <button type="button" onclick="showRecommendations()">Get Recommendations</button>
+        </form>
+        <div id="recommendations" class="hidden">
+            <button>Recommended for You:</button>
+            <p id="recommendation-text"></p>
+        </div>
+    </section>
+    
+    <script>
+        function showRecommendations() {
+            const interest = document.getElementById('interest').value;
+            const recommendationText = document.getElementById('recommendation-text');
+    
+            if (interest === 'sewing') {
+                recommendationText.textContent = 'Join our sewing workshops to improve your skills and create amazing costumes!';
+            } else if (interest === 'digital-design') {
+                recommendationText.textContent = 'Check out our digital design sessions to learn new techniques and tools!';
+            } else if (interest === 'traditional-art') {
+                recommendationText.textContent = 'Explore our traditional art workshops to master classic techniques and mediums!';
+            } else if (interest === 'comics') {
+                recommendationText.textContent = 'Dive into our comics workshops to learn about storytelling, drawing, and creating your own comics!';
+            }
+    
+            document.getElementById('recommendations').classList.remove('hidden');
+        }
+    </script>
+    
+    </main>
+
+
+
+
+
+
+
+    <footer>
+        <p>Contact us at: TheComicVerse@gmail.com</p>
+        <p>&copy; 2024 Art Trade Fair. All rights reserved.</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+
+
+
+</html>
