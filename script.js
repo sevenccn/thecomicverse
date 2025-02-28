@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Countdown Timer
-    const endDate = new Date("June 28, 2024 09:00:00").getTime();
+    const endDate = new Date("June 28, 2040 09:00:00").getTime();
 
     function updateCountdown() {
         const now = new Date().getTime();
